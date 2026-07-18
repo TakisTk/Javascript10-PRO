@@ -1,0 +1,29 @@
+const person = {
+    firstname: "Alice",
+    lastname: "A.",
+    city: "Athens",
+    age: 20,
+    isStudent: false
+}
+
+
+for (let key in person) {
+    console.log(`${key},  ${person[key]}`)
+}
+
+
+for (const [key, value] of Object.entries(person)) {
+    console.log(`${key}, ${value}`)
+}
+
+Object.entries(person).forEach(([key, value]) => {
+    console.log(`${key}, ${value}`)
+})
+
+const keys = Object.keys(person)
+keys.forEach(key => console.log(`${key}, ${person[key]}`))
+
+const grades = { maths: 8, history: 7, tech: 10 }
+const sum = Object.values(grades).reduce((sum, val) => sum + val, 0)
+const avgStr = (sum / Object.values(grades).length).toFixed(2)
+console.log(`Average: ${avgStr}`)
