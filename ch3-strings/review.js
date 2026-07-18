@@ -1,125 +1,134 @@
-// Άσκηση
-// Μία συνάρτηση που να παίρνει ένα πίνακα
-// αριθμών και να επιστρέφει το μεγαλύτερο
-// αριθμό, χωρίς την Math.max
+// Άσκηση 1
+// Μία συνάρτηση που παίρνει ως παράμετρο ένα string
+// και επιστρέφει ένα νέο string με τους χαρακτήρες
+// σε αντίστροφη σειρά
 
-function findMax(arr) {
-    if (!Array.isArray(arr) || arr.length === 0) {
-        return
+function reverse(str) {
+    let returnedStr = ''
+
+    for (let i = str.length - 1; i >= 0; i--) {
+        returnedStr += str[i]
     }
 
-    let max = -Infinity
-    for (const element of arr) {
-        if (element > max) {
-            max = element
-        }
-    }
-    return max
+    return returnedStr;
 }
 
-console.log(findMax([13, 5, 78, 42]))
+function reverse2(str) {
+    return str.trim().split('').reverse().join('');
+}
+
+let str = "Coding"
+console.log(reverse(str))
 
 
 // Άσκηση 2
-// Μία συνάρτηση που λαμβάνει ως είσοδο
-// ένα πίνακα αριθμών και επιστρέφει τον
-// μέσο όρο
+// Μία συνάρτηση που να ελέγχει αν ένα string
+// είναι παλίνδρομο, αγνοώντας πεζά/κεφαλαία και κενά.
+// Επιστρέφει boolean
 
-function findAvg(arr) {
-    if (!Array.isArray(arr) || arr.length === 0) {
-        return
+function palindrome(str) {
+    const cleaned = str.trim().toUpperCase().split(/\s+/).join('')
+
+    for (let i = 0, j = cleaned.length - 1; i < j; i++, j--) {
+        if (cleaned[i] !== cleaned[j]) {
+            return false;
+        }
     }
-
-    let sum = 0
-    for (const num of arr) {
-        sum += num
-    }
-
-    return sum / arr.length
+    return true;
 }
 
-// Functional Solution
-function findAvg2(arr) {
-    if (!Array.isArray(arr) || arr.length === 0) {
-        return
-    }
-
-    return arr.reduce((total, num) => total + num, 0)  / arr.length
+function palindrome2(str) {
+    const reversed = str.trim().toUpperCase().split(/\s+/).reverse().join('')
+    return reversed === str.trim().toUpperCase().split(/\s+/).join('')
 }
+
 
 // Άσκηση 3
-// Μία συνάρτηση που ελέγχει (επιστρέφει true/false) 
-// αν δύο πίνακες είναι ίσοι: ίδιο μήκος και ίδια στοιχεία
+// Μία συνάρτηση που μετράει πόσα φωνήεντα
+// [a, e, i, 0, u] περιέχει ένα string, ανεξαρτήτως
+// κεφαλαίων / πεζών 
 
-function equalArrays(arr1, arr2) {
-    if (!Array.isArray(arr1) || arr1.length === 0) {
-        return false
-    }
+function countVowels(str) {
+    const vowels = [...'aeiou']
+    let count = 0
 
-    if (!Array.isArray(arr2) || arr2.length === 0) {
-        return false
-    }
-
-    if (arr1.length !== arr2.length) return false
-
-    for (let i = 0; i < arr1.length; i++) {
-        if (arr1[i] !== arr2[i]) return false
-    }
-    return true
-}
-
-console.log(equalArrays([1, 2, 3, 3], [1, 2, 3, 4]))
-
-// Άσκηση 4
-// Μία συνάρτηση που λαμβάνει ως είσοδο 
-// ένα πίνακα και μία τιμή και επιστρέφει
-// ένα νέο πίνακα (ο αρχικός δεν αλλάζει) 
-// χωρίς να εμφανίζει την τιμή αυτή
-
-function removeAllOccurances(arr, valueToRemove) {
-    return arr.filter(value => value !== valueToRemove)
-}
-
-// Άσκηση 5
-// Μία συνάρτηση που βρίσκει το 2ο μεγαλύτερο αριθμό
-// ενός πίνακα. [7, 7, 4] ο 2ος μεγαλύτερος είναι το 4
-function secondMax(arr) {
-    if (!Array.isArray(arr) || arr.length < 2) {
-        return
-    }
-
-    let firstMax = -Infinity
-    let secondMax = -Infinity
-
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i] > firstMax) {
-            secondMax = firstMax
-            firstMax = arr[i]
-        } else if (arr[i] > secondMax && arr[i] !== firstMax) {
-            secondMax = arr[i]
+    for (const ch of str.toLowerCase()) {
+        if (vowels.includes(ch)) {
+            count++
         }
     }
 
-    return secondMax
+    return count;
 }
 
-function secondMAx2(arr) {
-    const uniqueNumbers = [...new Set(arr)]
-    uniqueNumbers.sort((a, b) => b - a)
-    return uniqueNumbers[1]
+console.log(countVowels('Javascript'))
+
+// Άσκηση 4
+// Μία συνάρτηση που παίρνει ως είσοδο μία πρόταση
+// και να επιστρέφει την ίδια πρόταση αλλά με το
+// πρώτο γράμμα κάθε λέξης κεφαλαίο και τα υπόλοιπα πεζά
+// και ένα κενό κενό μεταξύ των λέξεων
+// 'codING   faCtory'  -> 'Coding Factory' 
+
+function capitalize(str) {
+    if (!str.trim()) return ''
+    
+    let returnedSentence = ''
+    const tokens = str.trim().split(/\s+/)
+
+    for (const token of tokens) {
+        const newToken1 = token[0].toUpperCase()
+        const newToken2 = token.slice(1).toLowerCase()
+        returnedSentence += newToken1 + newToken2 + ' '
+    }
+    return returnedSentence.trim()
+}
+
+console.log(capitalize('codING   faCtory'))
+
+
+// Άσκηση 5
+// Μία συνάρτηση που παίρνει ένα κείμενο και
+// μία λέξη και επιστρέφει πόσες φορές εμφανίζεται
+// αυτή η λέξη μέσα στο κείμενο (ανεξαρτήτων πεζών/κεφαλαίων)
+
+function wordCount(text, str) {
+    if (!text.trim() || !str.trim()) return 0
+
+    const words = text.trim().toLowerCase().split(/\s+/)
+    const searchTerm = str.trim().toLowerCase()
+    let times = 0
+
+    for (const word of words) {
+        if (word === searchTerm) times++
+    }
+    return times;
+}
+
+
+function wordCount2(text, str) {
+    if (!text.trim() || !str.trim()) return 0
+
+    const pattern = new RegExp('\\b + str.trim() + \\b', 'gi')
+    const matches = text.match(pattern)
+
+    return matches === null ? 0 : matches.length
 }
 
 
 // Άσκηση 6
-// Μία συνάρτηση που να παίρνει ως είσοδο ένα πίνακα
-// και ένα θετικό offset και να κάνει αριστερό και κυκλικό
-// shift κατά offset θέσεις. [1, 2, 3] -> [2, 3, 1]
-function shiftLeft(arr, offset) {
-    let shiftedArr = []
-    const normalizedOffset = offset % arr.length;
+// Μία συνάρτηση που παίρνει ως είσοδο τον αριθμό κάρτας
+// π.χ. '1234 5678 2345 6543' και επιστρέφει masked όλα τα ψηφία
+// εκτός από τα 4 τελευταία, π.χ. ************6543
 
-    for (let i = 0; i < arr.length; i++) {
-        shiftedArr[(i - normalizedOffset + arr.length) % arr.length] = arr[i]
-    }
+function maskCardNumber(cardNumber) {
+    if (!cardNumber.trim()) return
 
+    const digits = cardNumber.trim().split(' ').join('')
+    const lastFourDigits = digits.slice(-4)
+    const masked = '*'.repeat(digits.length - 4)
+
+    return masked + lastFourDigits
 }
+
+console.log(maskCardNumber('1234 5678 2345 6543'))
