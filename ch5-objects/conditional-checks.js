@@ -17,3 +17,4 @@ authorLast = book2?.author?.lastname ?? "Unknown"
 if (book.hasOwnProperty('author')) {
     console.log(book.author)
 }
+
