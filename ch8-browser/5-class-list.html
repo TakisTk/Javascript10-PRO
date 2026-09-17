@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>CSS-Styling με ClassList</title>
+
+    <style>
+      .outer {
+        width: 90%;
+        border: 1px solid black;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi quo
+        inventore ex odio facere? Voluptate voluptas vel blanditiis voluptatem
+        laudantium voluptatum, neque asperiores aspernatur ipsam facere
+        veritatis? Voluptatum, rem mollitia!
+      </p>
+    </div>
+
+    <script>
+      const container = document.getElementById("container");
+      container.classList.add("outer");
+    </script>
+  </body>
+</html>
