@@ -26,5 +26,5 @@ function onResetClicked() {
 
 function onIncreaseClicked() {
   increaseCounter();
-  render(getCounter);
+  render(getCounter());
 }
